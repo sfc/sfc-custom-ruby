@@ -21,7 +21,8 @@ require 'digest/md5'
 require 'base64'
 require 'builder'
 
-class SFCcustomResultException < Exception; end
+class SFCcustomException < Exception; end
+class SFCcustomResultException < SFCcustomException; end
 class SFCcustomTemplateDoesNotExist < SFCcustomResultException; end
 
 class SFCcustom
