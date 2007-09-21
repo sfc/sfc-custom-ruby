@@ -1,5 +1,5 @@
 # = SFCcustom
-# Ruby interface for SFC's Custom templating engine
+# Ruby interface for SFCcustom, a web service for generating dynamic content for print
 #
 #  == Requirements
 #  * xmlsimple (gem install xml-simple)
@@ -14,9 +14,9 @@
 #  sign.generate!                 # => #<SFCcustom::Template:0x604654 @name="Sign">
 
 require 'rubygems'
+require 'xmlsimple' unless defined?(XmlSimple)
 require 'cgi'
 require 'net/http'
-require 'xmlsimple' unless defined?(XmlSimple)
 require 'digest/md5'
 require 'base64'
 require 'builder'
@@ -38,9 +38,12 @@ class SFCcustom
     []
   end
 
-  # Upload a new template to SFCcustom, +data+ can either be a Base64-encoded
-  # string or a Tempfile or File object. In either case it must be a PDF file
-  # with PDFlib blocks. Returns a hash with :status and :blocks
+  # Upload a new template to SFCcustom, by passing a +URL+ of a PDF file with
+  # PDFlib blocks. +digest+ (optional) is the MD5 digest of the file, compared
+  # after the file has been processed to ensure it has been transferred
+  # properly.
+  #
+  # Returns a hash with :status and :blocks
   def upload(name, url, digest = nil)
     
     r = request('UploadTemplate', { :name => name, :url => url, :digest => digest})
@@ -58,16 +61,20 @@ class SFCcustom
     return result
   end
   
-  # Delete an existing template, return true or false on success or failure
+  # Delete an existing template.
+  #
+  # Return +true+ or +false+ on success or failure, respectively
   def delete(name)
     r = request('DeleteTemplate', { :name => name })
     return r['status'] == ' ok '    
   end
   
+  # Generate custom output based on +name+ template and +params+
   def generate(name, params, resize = nil, cache = true, copy = nil)
     request('GenerateCustom', { :name => name, :data => params, :resize => resize, :cache => cache, :copy => copy})
   end
   
+  # List the fonts available
   def fonts
     request('ListFonts')
   end
