@@ -70,8 +70,8 @@ class SFCcustom
   end
   
   # Generate custom output based on +name+ template and +params+
-  def generate(name, params, resize = nil, cache = true, copy = nil)
-    request('GenerateCustom', { :name => name, :data => params, :resize => resize, :cache => cache, :copy => copy})
+  def generate(name, params, resize = nil, cache = true, copy = nil, thumbnail = true)
+    request('GenerateCustom', { :name => name, :data => params, :resize => resize, :cache => cache, :copy => copy, :thumbnail => thumbnail})
   end
   
   # List the fonts available
@@ -167,6 +167,7 @@ class SFCcustom
           b.output do |t|
             t.resize(params[:resize]) if params[:resize]
             t.copy(params[:copy]) if params[:copy]
+            t.thumbnail("false")
           end
           b.blocks do |bl|
             params[:data].each do |k, v|
