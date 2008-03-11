@@ -167,8 +167,9 @@ class SFCcustom
           b.output do |t|
             t.resize(params[:resize]) if params[:resize]
             t.copy(params[:copy]) if params[:copy]
-            t.thumbnail("false")
+            t.thumbnail(params[:thumbnail].to_s)
           end
+          
           b.blocks do |bl|
             params[:data].each do |k, v|
               
@@ -181,6 +182,8 @@ class SFCcustom
                   "text"
               end
               
+              puts v.to_yaml
+              
               bl.tag!(block_type) do |blo|
                 blo.name(k.to_s)
                 if (k.to_s =~ /image|photo|picture|pdf/i) != nil
@@ -190,6 +193,21 @@ class SFCcustom
                     else
                       blo.asset(v)
                     end                    
+                  elsif v.is_a?(Hash)
+                    blo.template do
+                      blo.name v['template']
+                    end
+                    blo.blocks do
+                      v.each do |kk, vv|
+                        if kk == 'template'
+                        else
+                          blo.text do
+                            blo.name kk
+                            blo.value {|x| x.cdata!(vv) }
+                          end
+                        end
+                      end                      
+                    end
                   else
                     blo.url(v['url'])
                   end
@@ -197,8 +215,8 @@ class SFCcustom
                   blo.rotate(v['rotate']) if v['rotate']
                   blo.position(v['position']) if v['position']
                 else
-                  if v.is_a?(String)
-                    blo.value(v)
+                  if v.is_a?(String) || v.nil?
+                    blo.value {|x| x.cdata!(v.to_s) }
                   else
                     blo.value(v['value'])
                     blo.font(v['font']) if v['font']
@@ -233,7 +251,7 @@ class SFCcustom
     rescue
       raise SFCcustomResultException
     end
-    
+    puts result.inspect
     return result
   end
 end
