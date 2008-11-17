@@ -199,12 +199,23 @@ class SFCcustom
                       v.each do |kk, vv|
                         if kk == 'template'
                         else
-                          blo.text do
-                            blo.name kk
-                            blo.value {|x| x.cdata!(vv) }
+                          if kk =~ /^PDF/
+                            blo.pdf do
+                              blo.name kk
+                              if vv.match(/http/i)
+                                blo.url vv
+                              else
+                                blo.asset vv
+                              end
+                            end
+                          else
+                            blo.text do
+                              blo.name kk
+                              blo.value {|x| x.cdata!(vv) }
+                            end
                           end
                         end
-                      end                      
+                      end
                     end
                   else
                     blo.url(v['url'])
