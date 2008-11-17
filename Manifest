@@ -1,5 +1,8 @@
-README
-Manifest
-LICENSE
-lib/sfc-custom.rb
 CHANGELOG
+LICENSE
+Manifest
+README
+test/fixtures/expected_output_for_test_personalized_vps_order_with_logo.xml
+test/fixtures/expected_output_for_test_personalized_vps_order_with_text.xml
+test/fixtures/expected_output_for_test_standard_vps_order.xml
+test/test_sfc-custom.rb
