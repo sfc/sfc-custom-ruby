@@ -1,6 +1,8 @@
 CHANGELOG
+lib/sfc-custom.rb
 LICENSE
 Manifest
+Rakefile
 README
 test/fixtures/expected_output_for_test_personalized_vps_order_with_logo.xml
 test/fixtures/expected_output_for_test_personalized_vps_order_with_text.xml
