@@ -1,0 +1,44 @@
+<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<GenerateCustom>
+  <authentication>
+    <key>92be4756d943439c73f20ec165bacca9</key>
+  </authentication>
+  <template>
+    <name>LMSERIESNW_back</name>
+  </template>
+  <output>
+    <thumbnail>false</thumbnail>
+  </output>
+  <blocks>
+    <text>
+      <name>TEXT_SKU</name>
+      <value>
+        <![CDATA[09PRESBI-001]]>
+      </value>
+    </text>
+    <pdf>
+      <name>PDF_CONTRACTOR_TYPE</name>
+      <template>
+        <name>Logo_Only</name>
+      </template>
+      <blocks>
+        <pdf>
+          <name>PDF_CONTRACTOR_LOGO</name>
+          <url>http://ctsamples.com/logos/0000/0389/7bc10cce32aaa4287d4fc0c1ded49627.pdf</url>
+        </pdf>
+        <text>
+          <name>TEXT_ADDITIONAL_INFORMATION</name>
+          <value>
+            <![CDATA[]]>
+          </value>
+        </text>
+      </blocks>
+    </pdf>
+    <text>
+      <name>TEXT_BARCODE</name>
+      <value>
+        <![CDATA[*CT-04191-1-1*]]>
+      </value>
+    </text>
+  </blocks>
+</GenerateCustom>

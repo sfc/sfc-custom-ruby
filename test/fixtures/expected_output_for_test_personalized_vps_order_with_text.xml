@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenerateCustom>
+  <authentication>
+    <key>92be4756d943439c73f20ec165bacca9</key>
+  </authentication>
+  <template>
+    <name>LMSERIESNW_back</name>
+  </template>
+  <output>
+    <thumbnail>false</thumbnail>
+  </output>
+  <blocks>
+    <text>
+      <name>TEXT_SKU</name>
+      <value>
+        <![CDATA[LMSERIESNW-002]]>
+      </value>
+    </text>
+    <pdf>
+      <name>PDF_CONTRACTOR_TYPE</name>
+      <template>
+        <name>SMC</name>
+      </template>
+      <blocks>
+        <text>
+          <name>TEXT_CONTRACTOR_NAME</name>
+          <value>
+            <![CDATA[www.customquality.net]]>
+          </value>
+        </text>
+        <text>
+          <name>TEXT_ADDITIONAL_INFORMATION</name>
+          <value>
+            <![CDATA[<avoidbreak=true>472-2282<avoidbreak=false>
+<avoidbreak=true>Custom Quality <avoidbreak=false>
+<avoidbreak=true>Construction Inc<avoidbreak=false>]]>
+          </value>
+        </text>
+      </blocks>
+    </pdf>
+    <text>
+      <name>TEXT_BARCODE</name>
+      <value>
+        <![CDATA[*CT-03037-1-1*]]>
+      </value>
+    </text>
+  </blocks>
+</GenerateCustom>

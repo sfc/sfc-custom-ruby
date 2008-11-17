@@ -124,7 +124,7 @@ class SFCcustom
     attr_accessor :name, :type
   end 
   
-  def request(type, params = nil)
+  def build_request(type, params = nil)
     builder = Builder::XmlMarkup.new(:indent => 2)
     builder.instruct!(:xml, :version => "1.0", :encoding => "UTF-8")
 
@@ -133,29 +133,29 @@ class SFCcustom
         a.key(api_key)
       end
       case type
-        when 'UploadTemplate':
+        when 'UploadTemplate'
           b.template do |t|
             t.name(params[:name])
             t.url(params[:url])
             t.digest(params[:digest])
           end
 
-        when 'UploadAsset':
+        when 'UploadAsset'
           b.asset do |t|
             t.filename(params[:filename])
             t.data(params[:data])
           end
 
-        when 'DeleteTemplate':
+        when 'DeleteTemplate'
           b.template do |t|
             t.name(params[:name])
           end
         
-        when 'ListTemplates':
+        when 'ListTemplates'
         
-        when 'ListFonts':
+        when 'ListFonts'
         
-        when 'GenerateCustom':
+        when 'GenerateCustom'
           b.template do |t|
             t.name(params[:name])
           end
@@ -181,8 +181,6 @@ class SFCcustom
                 else
                   "text"
               end
-              
-              puts v.to_yaml
               
               bl.tag!(block_type) do |blo|
                 blo.name(k.to_s)
@@ -229,6 +227,12 @@ class SFCcustom
           # Not much else to do, eh?
       end
     end
+    
+    return xml   
+  end
+  
+  def request(type, params = nil)
+    xml = build_request(type, params)
     
     puts xml
     

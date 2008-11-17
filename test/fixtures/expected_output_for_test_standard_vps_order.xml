@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenerateCustom>
+  <authentication>
+    <key>92be4756d943439c73f20ec165bacca9</key>
+  </authentication>
+  <template>
+    <name>LMSERIESNW_back</name>
+  </template>
+  <output>
+    <thumbnail>false</thumbnail>
+  </output>
+  <blocks>
+    <text>
+      <name>TEXT_SKU</name>
+      <value>
+        <![CDATA[09LMPREMAV-004]]>
+      </value>
+    </text>
+    <text>
+      <name>TEXT_BARCODE</name>
+      <value>
+        <![CDATA[*CT-XXXXX-1-1*]]>
+      </value>
+    </text>
+  </blocks>
+</GenerateCustom>
