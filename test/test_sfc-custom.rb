@@ -6,6 +6,13 @@ module Kernel
   end
 end
 
+begin
+  require 'rubygems'
+  require 'redgreen'
+rescue LoadError
+  puts "** Error loading redgreen"
+end
+
 $:.unshift(File.join(File.dirname(__FILE__), %w[.. lib]))
 require 'sfc-custom'
 
