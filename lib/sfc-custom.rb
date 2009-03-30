@@ -20,6 +20,7 @@ require 'net/http'
 require 'digest/md5'
 require 'base64'
 require 'builder'
+require 'logger'
 
 class SFCcustomException < Exception; end
 class SFCcustomResultException < SFCcustomException; end
@@ -29,6 +30,9 @@ class SFCcustom
   attr_reader :api_key, :host, :api
   
   def initialize(api_key = '464809cd2debb66da895ce171c95c70c')
+    @@logger  = Logger.new('/var/log/SFCcustom.log')
+    @@logger.level = Logger::DEBUG
+    
     @api_key  = api_key
     @host     = 'custom.sfcgraphics.com'
     @api      = '/batch.php'
@@ -124,7 +128,7 @@ class SFCcustom
     attr_accessor :name, :type
   end 
   
-  def build_request(type, params = nil)
+  def request(type, params = nil)
     builder = Builder::XmlMarkup.new(:indent => 2)
     builder.instruct!(:xml, :version => "1.0", :encoding => "UTF-8")
 
@@ -133,29 +137,29 @@ class SFCcustom
         a.key(api_key)
       end
       case type
-        when 'UploadTemplate'
+        when 'UploadTemplate':
           b.template do |t|
             t.name(params[:name])
             t.url(params[:url])
             t.digest(params[:digest])
           end
 
-        when 'UploadAsset'
+        when 'UploadAsset':
           b.asset do |t|
             t.filename(params[:filename])
             t.data(params[:data])
           end
 
-        when 'DeleteTemplate'
+        when 'DeleteTemplate':
           b.template do |t|
             t.name(params[:name])
           end
         
-        when 'ListTemplates'
+        when 'ListTemplates':
         
-        when 'ListFonts'
+        when 'ListFonts':
         
-        when 'GenerateCustom'
+        when 'GenerateCustom':
           b.template do |t|
             t.name(params[:name])
           end
@@ -181,6 +185,8 @@ class SFCcustom
                 else
                   "text"
               end
+              
+              @@logger.info v.to_yaml
               
               bl.tag!(block_type) do |blo|
                 blo.name(k.to_s)
@@ -239,18 +245,12 @@ class SFCcustom
       end
     end
     
-    return xml   
-  end
-  
-  def request(type, params = nil)
-    xml = build_request(type, params)
-    
-    puts xml
+    @@logger.info "XML Produced: #{xml}"
     
     http = Net::HTTP.new(host, 80)
     res = http.post("http://#{host}#{api}", "xml=#{xml}", {'Accept' => 'application/xml'})
     
-    puts res.body
+    @@logger.info "Result: #{res.body}"
     
     begin
       result = XmlSimple.xml_in(res.body, { 'ForceArray' => false })
@@ -266,7 +266,9 @@ class SFCcustom
     rescue
       raise SFCcustomResultException
     end
-    puts result.inspect
+    
+    @@logger.info result.inspect
+    
     return result
   end
 end
