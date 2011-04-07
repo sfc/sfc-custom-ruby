@@ -271,7 +271,7 @@ class SFCcustom
     
     @@logger.info result.inspect
     
-    return @result
+    return result
   end
   
   def request(type, params = nil)
