@@ -17,6 +17,7 @@ class TestSFCcustom < Test::Unit::TestCase
 
   def test_basics
     sfc = SFCcustom.new('44a568611beab6e76daef41a81f38ebe')
+    
     assert sfc
     assert_kind_of(SFCcustom, sfc)
   end
@@ -36,8 +37,6 @@ class TestSFCcustom < Test::Unit::TestCase
     output = custom.build_request("GenerateCustom", { :name => "LMSERIESNW_back", :data => blocks, :resize => nil, :cache => false, :copy => nil, :thumbnail => false})
     
     expected = File.open(File.join(File.dirname(__FILE__), 'fixtures', "expected_output_for_#{__method__}.xml")).read
-  
-    puts output
   
     assert_equal expected, output
   end
