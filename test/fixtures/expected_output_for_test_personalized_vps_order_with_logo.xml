@@ -22,16 +22,16 @@
         <name>Logo_Only</name>
       </template>
       <blocks>
-        <pdf>
-          <name>PDF_CONTRACTOR_LOGO</name>
-          <url>http://ctsamples.com/logos/0000/0389/7bc10cce32aaa4287d4fc0c1ded49627.pdf</url>
-        </pdf>
         <text>
           <name>TEXT_ADDITIONAL_INFORMATION</name>
           <value>
             <![CDATA[]]>
           </value>
         </text>
+        <pdf>
+          <name>PDF_CONTRACTOR_LOGO</name>
+          <url>http://ctsamples.com/logos/0000/0389/7bc10cce32aaa4287d4fc0c1ded49627.pdf</url>
+        </pdf>
       </blocks>
     </pdf>
     <text>

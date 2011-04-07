@@ -128,7 +128,7 @@ class SFCcustom
     attr_accessor :name, :type
   end 
   
-  def request(type, params = nil)
+  def build_request(type, params = nil)
     builder = Builder::XmlMarkup.new(:indent => 2)
     builder.instruct!(:xml, :version => "1.0", :encoding => "UTF-8")
 
@@ -185,8 +185,6 @@ class SFCcustom
                 else
                   "text"
               end
-              
-              @@logger.info v.to_yaml
               
               bl.tag!(block_type) do |blo|
                 blo.name(k.to_s)
@@ -247,6 +245,10 @@ class SFCcustom
     
     @@logger.info "XML Produced: #{xml}"
     
+    xml
+  end
+  
+  def send_request(xml)
     http = Net::HTTP.new(host, 80)
     res = http.post("http://#{host}#{api}", "xml=#{xml}", {'Accept' => 'application/xml'})
     
@@ -269,6 +271,11 @@ class SFCcustom
     
     @@logger.info result.inspect
     
-    return result
+    return @result
+  end
+  
+  def request(type, params = nil)
+    xml = build_request(type, params)
+    send_request(xml)
   end
 end

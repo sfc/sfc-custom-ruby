@@ -1,11 +1,5 @@
 require 'test/unit'
 
-module Kernel
-  def __method__
-    caller[0][/`([^']*)'/, 1]
-  end
-end
-
 begin
   require 'rubygems'
   require 'redgreen'
@@ -15,8 +9,6 @@ end
 
 $:.unshift(File.join(File.dirname(__FILE__), %w[.. lib]))
 require 'sfc-custom'
-
-$rakefile = nil # Avoids a warning in rdoctask.rb
 
 class TestSFCcustom < Test::Unit::TestCase
   def setup
@@ -44,6 +36,8 @@ class TestSFCcustom < Test::Unit::TestCase
     output = custom.build_request("GenerateCustom", { :name => "LMSERIESNW_back", :data => blocks, :resize => nil, :cache => false, :copy => nil, :thumbnail => false})
     
     expected = File.open(File.join(File.dirname(__FILE__), 'fixtures', "expected_output_for_#{__method__}.xml")).read
+  
+    puts output
   
     assert_equal expected, output
   end
