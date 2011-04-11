@@ -176,7 +176,6 @@ class SFCcustom
           
           b.blocks do |bl|
             params[:data].each do |k, v|
-              
               block_type = case k.to_s 
                 when /image|photo|picture/i
                   "image"
@@ -194,7 +193,11 @@ class SFCcustom
                       blo.url(v)
                     else
                       blo.asset(v)
-                    end                    
+                    end 
+                  elsif block_type == "image" && v.is_a?(Hash)                   
+                    v.each do |key, value|
+                      blo.tag!(key, value)
+                    end
                   elsif v.is_a?(Hash)
                     blo.template do
                       blo.name v['template']

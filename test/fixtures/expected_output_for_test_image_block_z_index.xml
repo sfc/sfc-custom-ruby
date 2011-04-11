@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenerateCustom>
+  <authentication>
+    <key>92be4756d943439c73f20ec165bacca9</key>
+  </authentication>
+  <template>
+    <name>LMSERIESNW_back</name>
+  </template>
+  <output>
+    <thumbnail>false</thumbnail>
+  </output>
+  <blocks>
+    <image>
+      <name>IMAGE_P2_THUMB</name>
+      <asset>FOOBAZ_preview</asset>
+    </image>
+    <image>
+      <name>IMAGE_P1_THUMB</name>
+      <asset>FOOBAR_preview</asset>
+    </image>
+  </blocks>
+</GenerateCustom>
