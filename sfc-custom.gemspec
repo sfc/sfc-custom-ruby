@@ -6,12 +6,9 @@ Gem::Specification.new do |s|
   s.authors = ["SFC Limited, Inc."]
   s.date = %q{2008-11-17}
   s.description = %q{Library for accessing SFCcustom, a web service for generating dynamic content for print}
-  s.email = %q{}
-  s.extra_rdoc_files = ["CHANGELOG", "lib/sfc-custom.rb", "LICENSE", "README"]
+  s.email = %q{kmarsh@formandfx.com}
   s.files = ["CHANGELOG", "lib/sfc-custom.rb", "LICENSE", "Manifest", "Rakefile", "README", "test/fixtures/expected_output_for_test_personalized_vps_order_with_logo.xml", "test/fixtures/expected_output_for_test_personalized_vps_order_with_text.xml", "test/fixtures/expected_output_for_test_standard_vps_order.xml", "test/test_sfc-custom.rb", "sfc-custom.gemspec"]
-  s.has_rdoc = true
   s.homepage = %q{}
-  s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Sfc-custom", "--main", "README"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{sfc}
   s.rubygems_version = %q{1.2.0}

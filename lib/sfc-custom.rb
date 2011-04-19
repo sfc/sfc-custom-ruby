@@ -27,7 +27,7 @@ class SFCcustomResultException < SFCcustomException; end
 class SFCcustomTemplateDoesNotExist < SFCcustomResultException; end
 
 class SFCcustom
-  attr_reader :api_key, :host, :api
+  attr_accessor :api_key, :host, :api
   
   def initialize(api_key = '464809cd2debb66da895ce171c95c70c')
     @@logger  = Logger.new('/var/log/SFCcustom.log')
