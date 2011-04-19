@@ -253,8 +253,14 @@ class SFCcustom
   end
   
   def send_request(xml)
-    http = Net::HTTP.new(host, 80)
-    res = http.post("http://#{host}#{api}", "xml=#{xml}", {'Accept' => 'application/xml'})
+    if host == 'custom.sfcgraphics.com'
+      http = Net::HTTP.new(host, 80)
+      res = http.post("http://#{host}#{api}", "xml=#{xml}", {'Accept' => 'application/xml'})    
+    else
+      request = Net::HTTP::Post.new(api)
+      request.body = xml
+      res = Net::HTTP.start(host, 80) {|http| http.request(request) }
+    end
     
     @@logger.info "Result: #{res.body}"
     
